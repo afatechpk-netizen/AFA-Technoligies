@@ -17,24 +17,22 @@ export default function Footer() {
           {/* Column 1: Brand & Strategic Positioning */}
           <div className="footer-col-brand">
             <a className="footer-brand-logo" href="#home" aria-label="AFA Technologies">
-              <div className="footer-logo-frame">
-                <Image
-                  src="/images/logo.png"
-                  alt="AFA Technologies"
-                  width={90}
-                  height={90}
-                  className="footer-logo-img"
-                />
-              </div>
+              <Image
+                src="/images/logo.png"
+                alt="AFA Technologies"
+                width={110}
+                height={110}
+                className="footer-logo-img"
+              />
             </a>
             <p className="footer-brand-desc">
               AFA Technologies accelerates enterprise software &amp; B2B pipeline. We connect high-growth products with qualified enterprise buyers without the overhead of in-house sales hiring.
             </p>
           </div>
 
-          {/* Column 2: Company Navigation (Matching Navbar Sequence) */}
+          {/* Column 2: Useful Links */}
           <div className="footer-col-nav">
-            <h4 className="footer-col-title">Company</h4>
+            <h4 className="footer-col-title">Useful Links</h4>
             <ul className="footer-nav-list">
               <li><a href="#client-impact">Client Impact</a></li>
               <li><a href="#solutions">Solutions &amp; Pods</a></li>
@@ -92,6 +90,30 @@ export default function Footer() {
                   className="footer-contact-val"
                 >
                   hello@afatechnologiesltd.com
+                </a>
+              </p>
+              <p className="footer-contact-line">
+                <svg
+                  className="footer-contact-icon"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#00bdf2"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+                <span className="footer-contact-label">Info:</span>{" "}
+                <a
+                  href="mailto:info@afatechnologiesltd.com"
+                  className="footer-contact-val"
+                >
+                  info@afatechnologiesltd.com
                 </a>
               </p>
             </div>
