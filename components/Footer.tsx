@@ -106,6 +106,8 @@ export default function Footer() {
             <a href="#">Terms and Conditions</a>
             <span className="footer-legal-divider">|</span>
             <a href="#">Consent Preferences</a>
+            <span className="footer-legal-divider">|</span>
+            <a href="/admin/login" style={{ opacity: 0.75 }}>Admin Portal</a>
           </div>
           <div className="footer-copy-text">
             &copy; <span>{year}</span> AFA Technologies. All rights reserved.

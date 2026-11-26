@@ -4,7 +4,7 @@ import { addQuery } from "@/lib/storage";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, company, market, pod, team, goal, message, source } = body;
+    const { name, email, phone, company, market, pod, team, goal, message, source } = body;
 
     // Validate essential fields
     if (!name || typeof name !== "string" || !name.trim()) {
@@ -35,6 +35,7 @@ export async function POST(request: Request) {
     const savedLead = addQuery({
       name: name.trim(),
       email: email.trim().toLowerCase(),
+      phone: phone ? String(phone).trim() : undefined,
       company: company.trim(),
       market: (market || "Unspecified").trim(),
       pod: pod ? String(pod).trim() : undefined,
