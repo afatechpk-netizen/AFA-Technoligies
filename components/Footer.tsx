@@ -20,8 +20,8 @@ export default function Footer() {
               <Image
                 src="/images/logo.webp"
                 alt="AFA Technologies"
-                width={60}
-                height={60}
+                width={76}
+                height={76}
                 className="footer-logo-img"
               />
             </a>
