@@ -38,13 +38,16 @@ export default function Hero() {
     return () => clearTimeout(timeout);
   }, [charIdx, isDeleting, wordIdx]);
 
-  // Lead Form state
+  // Lead Form state (Unified with Contact Form)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     company: "",
     market: "",
     pod: "",
+    team: "",
+    goal: "",
+    message: "",
   });
   const [errors, setErrors] = useState<Record<string, boolean>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -64,6 +67,8 @@ export default function Hero() {
     if (!formData.company.trim()) newErrors.company = true;
     if (!formData.market) newErrors.market = true;
     if (!formData.pod) newErrors.pod = true;
+    if (!formData.team) newErrors.team = true;
+    if (!formData.goal) newErrors.goal = true;
 
     setErrors(newErrors);
 
@@ -79,6 +84,9 @@ export default function Hero() {
             company: formData.company,
             market: formData.market,
             pod: formData.pod,
+            team: formData.team,
+            goal: formData.goal,
+            message: formData.message,
             source: "Hero Lead Form",
           }),
         });
@@ -92,7 +100,9 @@ export default function Hero() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -108,45 +118,48 @@ export default function Hero() {
       <div className="wrap">
         <div className="hero-copy hero-slide-in-left">
           <div className="hero-pill">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-            </svg>
-            <span>B2B Commercial Sales Partner &bull; The Bridge Between Tech &amp; Enterprise Buyers</span>
+            <span className="pill-pulse-dot"></span>
+            Dedicated B2B Sales Partner for Global Tech Companies
           </div>
 
           <h1>
-            We Sell Your Tech Products &amp; Services
+            We Sell Your B2B Tech Products
             <br />
-            <span className="hero-highlight">
-              <span>{typewriterWords[wordIdx].substring(0, charIdx)}</span>
-              <span className="cursor-blink"></span>
+            <span className="typewriter-text gradient-heading">
+              {typewriterWords[wordIdx].substring(0, charIdx)}
+              <span className="typewriter-cursor">|</span>
             </span>
           </h1>
 
-          <p className="lead">
-            <strong>You build the technology &mdash; we generate the revenue.</strong> AFA Technologies is the commercial sales engine bridging high-growth B2B products and services with qualified enterprise buyers worldwide. Our dedicated outbound pods represent your brand, book high-intent meetings, and close deals.
+          <p className="hero-lead">
+            AFA Technologies acts as the dedicated commercial bridge between your technology and global enterprise decision-makers. You focus on building great products &mdash; we secure qualified buyers and accelerate revenue.
           </p>
 
-          <div className="hero-cta">
-            <a className="btn-talk" href="#hero-lead-form">
-              Get Sales Team Blueprint <span>&rarr;</span>
+          <div className="cta-cluster">
+            <a className="btn btn--primary" href="#contact">
+              Deploy a Dedicated Sales Pod &rarr;
             </a>
-            <a className="btn-explore" href="#solutions">
-              How We Sell For You
+            <a className="btn btn--glass" href="#client-impact">
+              View Verified Client Results
             </a>
           </div>
 
-          <ul className="proof-list">
+          <div className="hero-highlights">
+            <div className="hero-stat-card">
+              <span className="hero-stat-val">14 Days</span>
+              <span className="hero-stat-lbl">To Launch Dedicated Pod</span>
+            </div>
+            <div className="hero-stat-card">
+              <span className="hero-stat-val">4.8&times;</span>
+              <span className="hero-stat-lbl">Avg. Pipeline Velocity</span>
+            </div>
+            <div className="hero-stat-card">
+              <span className="hero-stat-val">100%</span>
+              <span className="hero-stat-lbl">Outcome Alignment</span>
+            </div>
+          </div>
+
+          <ul className="hero-trust-bullets">
             <li>
               <svg
                 viewBox="0 0 20 20"
@@ -159,7 +172,7 @@ export default function Hero() {
               >
                 <path d="M4 10.5l4 4 8-9" />
               </svg>
-              We sell your products for you (Dedicated Sales Pods)
+              Enterprise-grade sales infrastructure
             </li>
             <li>
               <svg
@@ -173,7 +186,7 @@ export default function Hero() {
               >
                 <path d="M4 10.5l4 4 8-9" />
               </svg>
-              Direct C-suite buyer access &amp; qualified enterprise meetings
+              Global multi-region outbound reach
             </li>
             <li>
               <svg
@@ -262,44 +275,125 @@ export default function Hero() {
                     <option value="" disabled>
                       Select buyer market
                     </option>
-                    <option value="North America">North America (US &amp; Canada)</option>
+                    <option value="North America (US & Canada)">North America (US &amp; Canada)</option>
                     <option value="EMEA (UK & Europe)">EMEA (UK &amp; Europe)</option>
-                    <option value="APAC">APAC (Asia-Pacific)</option>
-                    <option value="Global Coverage">Global Multi-Region</option>
+                    <option value="APAC (Asia-Pacific)">APAC (Asia-Pacific)</option>
+                    <option value="Global Multi-Region">Global Multi-Region</option>
                   </select>
                   <span className="err">Select a target market.</span>
                 </div>
               </div>
 
-              <div className={`field ${errors.pod ? "has-error" : ""}`}>
-                <label htmlFor="hf-pod">Product / service you want sold</label>
+              <div className="row2">
+                <div className={`field ${errors.pod ? "has-error" : ""}`}>
+                  <label htmlFor="hf-pod">Product / service category</label>
+                  <select
+                    id="hf-pod"
+                    name="pod"
+                    required
+                    value={formData.pod}
+                    onChange={handleChange}
+                  >
+                    <option value="" disabled>
+                      Select product or service category
+                    </option>
+                    <option value="B2B SaaS & Software Platform">
+                      B2B SaaS &amp; Software Platform
+                    </option>
+                    <option value="Cybersecurity & Infrastructure Auth">
+                      Cybersecurity &amp; Infrastructure Auth
+                    </option>
+                    <option value="AI & Digital Platform Technology">
+                      AI &amp; Digital Platform Technology
+                    </option>
+                    <option value="Enterprise Advisory & Professional Services">
+                      Enterprise Advisory &amp; Services
+                    </option>
+                    <option value="Custom Tech Solution / Other">
+                      Custom Tech Solution / Other
+                    </option>
+                  </select>
+                  <span className="err">Select product or service.</span>
+                </div>
+
+                <div className={`field ${errors.team ? "has-error" : ""}`}>
+                  <label htmlFor="hf-team">Current sales team size</label>
+                  <select
+                    id="hf-team"
+                    name="team"
+                    required
+                    value={formData.team}
+                    onChange={handleChange}
+                  >
+                    <option value="" disabled>
+                      Select team size
+                    </option>
+                    <option value="No team yet (Founder-led)">
+                      No team yet (Founder-led)
+                    </option>
+                    <option value="1 to 5 SDRs/AEs">
+                      1 to 5 SDRs / AEs
+                    </option>
+                    <option value="6 to 20 sales team">
+                      6 to 20 sales team
+                    </option>
+                    <option value="20+ Enterprise Sales Org">
+                      20+ Enterprise Sales Org
+                    </option>
+                    <option value="Looking for fully outsourced pod">
+                      Looking for fully outsourced pod
+                    </option>
+                  </select>
+                  <span className="err">Select team size.</span>
+                </div>
+              </div>
+
+              <div className={`field ${errors.goal ? "has-error" : ""}`}>
+                <label htmlFor="hf-goal">Primary commercial goal</label>
                 <select
-                  id="hf-pod"
-                  name="pod"
+                  id="hf-goal"
+                  name="goal"
                   required
-                  value={formData.pod}
+                  value={formData.goal}
                   onChange={handleChange}
                 >
                   <option value="" disabled>
-                    Select product or service category
+                    Select primary goal
                   </option>
-                  <option value="B2B SaaS & Software Platform">
-                    B2B SaaS &amp; Software Platform
+                  <option value="Accelerate enterprise pipeline">
+                    Accelerate enterprise pipeline
                   </option>
-                  <option value="Cybersecurity & Infrastructure Auth">
-                    Cybersecurity &amp; Infrastructure Auth
+                  <option value="Enter new geographic market">
+                    Enter new geographic market
                   </option>
-                  <option value="AI & Digital Platform Technology">
-                    AI &amp; Digital Platform Technology
+                  <option value="Outsource outbound SDR function">
+                    Outsource outbound SDR function
                   </option>
-                  <option value="Enterprise Advisory & Professional Services">
-                    Enterprise Advisory &amp; Professional Services
+                  <option value="Close high-value enterprise deals">
+                    Close high-value enterprise deals
                   </option>
-                  <option value="Custom Tech Solution / Other">
-                    Custom Tech Solution / Other
+                  <option value="Build RevOps and CRM">
+                    Build RevOps and CRM
+                  </option>
+                  <option value="Other custom requirement">
+                    Other custom requirement
                   </option>
                 </select>
-                <span className="err">Select your product or service type.</span>
+                <span className="err">Select a primary goal.</span>
+              </div>
+
+              <div className="field">
+                <label htmlFor="hf-msg">
+                  Anything else we should know? <small>(optional)</small>
+                </label>
+                <textarea
+                  id="hf-msg"
+                  name="message"
+                  rows={2}
+                  placeholder="Tell us about your product, deal size, or target timeline..."
+                  value={formData.message}
+                  onChange={handleChange}
+                ></textarea>
               </div>
 
               <button className="btn-hero-submit" type="submit" disabled={isSubmitting}>

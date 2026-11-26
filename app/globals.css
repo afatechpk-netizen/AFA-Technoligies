@@ -187,7 +187,8 @@ ul{margin:0;padding:0;list-style:none}
 .hero-form-card .field{margin-bottom:12px}
 .hero-form-card .field label{font-size:.86rem;font-weight:600;color:var(--ink);margin-bottom:5px}
 .hero-form-card .field input,
-.hero-form-card .field select{
+.hero-form-card .field select,
+.hero-form-card .field textarea{
   padding:11px 13px;
   font-size:.94rem;
   border:1.5px solid var(--line);
@@ -195,9 +196,16 @@ ul{margin:0;padding:0;list-style:none}
   background:var(--mist);
   color:var(--ink);
   transition:border-color .2s,box-shadow .2s,background .2s;
+  width:100%;
+  font-family:inherit;
+}
+.hero-form-card .field textarea{
+  min-height:76px;
+  resize:vertical;
 }
 .hero-form-card .field input:focus,
-.hero-form-card .field select:focus{
+.hero-form-card .field select:focus,
+.hero-form-card .field textarea:focus{
   background:#ffffff;
   border-color:var(--blue-500);
   box-shadow:0 0 0 3px rgba(0,130,203,0.18);
@@ -2047,9 +2055,26 @@ ul{margin:0;padding:0;list-style:none}
   transform: translateY(-2px);
 }
 
+.footer-logo-frame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 8px 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  margin-bottom: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.footer-brand-logo:hover .footer-logo-frame {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0, 189, 242, 0.35);
+}
+
 .footer-logo-img {
   width: auto;
-  height: 74px;
+  height: 64px;
   display: block;
   object-fit: contain;
   transition: transform .2s ease;

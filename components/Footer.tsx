@@ -17,28 +17,30 @@ export default function Footer() {
           {/* Column 1: Brand & Strategic Positioning */}
           <div className="footer-col-brand">
             <a className="footer-brand-logo" href="#home" aria-label="AFA Technologies">
-              <Image
-                src="/images/logo.webp"
-                alt="AFA Technologies"
-                width={76}
-                height={76}
-                className="footer-logo-img"
-              />
+              <div className="footer-logo-frame">
+                <Image
+                  src="/images/logo.png"
+                  alt="AFA Technologies"
+                  width={90}
+                  height={90}
+                  className="footer-logo-img"
+                />
+              </div>
             </a>
             <p className="footer-brand-desc">
               AFA Technologies accelerates enterprise software &amp; B2B pipeline. We connect high-growth products with qualified enterprise buyers without the overhead of in-house sales hiring.
             </p>
           </div>
 
-          {/* Column 2: Company Navigation */}
+          {/* Column 2: Company Navigation (Matching Navbar Sequence) */}
           <div className="footer-col-nav">
             <h4 className="footer-col-title">Company</h4>
             <ul className="footer-nav-list">
-              <li><a href="#about">About</a></li>
-              <li><a href="#solutions">Solutions &amp; Pods</a></li>
               <li><a href="#client-impact">Client Impact</a></li>
+              <li><a href="#solutions">Solutions &amp; Pods</a></li>
               <li><a href="#process">How It Works</a></li>
-              <li><a href="#why-afa">Why AFA</a></li>
+              <li><a href="#why-afa">Why AFA Technologies</a></li>
+              <li><a href="#about">About</a></li>
               <li><a href="#faq">FAQ</a></li>
               <li><a href="#contact">Contact Us</a></li>
             </ul>
@@ -86,10 +88,10 @@ export default function Footer() {
                 </svg>
                 <span className="footer-contact-label">Email:</span>{" "}
                 <a
-                  href="mailto:Hello@afatechnologiesltd.com"
+                  href="mailto:hello@afatechnologiesltd.com"
                   className="footer-contact-val"
                 >
-                  Hello@afatechnologiesltd.com
+                  hello@afatechnologiesltd.com
                 </a>
               </p>
             </div>
@@ -106,8 +108,6 @@ export default function Footer() {
             <a href="#">Terms and Conditions</a>
             <span className="footer-legal-divider">|</span>
             <a href="#">Consent Preferences</a>
-            <span className="footer-legal-divider">|</span>
-            <a href="/admin/login" style={{ opacity: 0.75 }}>Admin Portal</a>
           </div>
           <div className="footer-copy-text">
             &copy; <span>{year}</span> AFA Technologies. All rights reserved.

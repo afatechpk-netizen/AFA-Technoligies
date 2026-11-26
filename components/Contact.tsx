@@ -9,6 +9,7 @@ export default function Contact() {
     email: "",
     company: "",
     market: "",
+    pod: "",
     team: "",
     goal: "",
     message: "",
@@ -30,6 +31,7 @@ export default function Contact() {
     }
     if (!formData.company.trim()) newErrors.company = true;
     if (!formData.market) newErrors.market = true;
+    if (!formData.pod) newErrors.pod = true;
     if (!formData.team) newErrors.team = true;
     if (!formData.goal) newErrors.goal = true;
 
@@ -46,6 +48,7 @@ export default function Contact() {
             email: formData.email,
             company: formData.company,
             market: formData.market,
+            pod: formData.pod,
             team: formData.team,
             goal: formData.goal,
             message: formData.message,
@@ -133,8 +136,8 @@ export default function Contact() {
 
             <p className="contact-alt">
               Prefer direct outreach? Write to{" "}
-              <a href="mailto:Hello@afatechnologiesltd.com">
-                Hello@afatechnologiesltd.com
+              <a href="mailto:hello@afatechnologiesltd.com">
+                hello@afatechnologiesltd.com
               </a>{" "}
               or call{" "}
               <a href="tel:+923436622666">
@@ -164,7 +167,7 @@ export default function Contact() {
           <div className="form-card reveal-slide-right">
             {!isSubmitted ? (
               <form id="lead-form" noValidate onSubmit={handleSubmit}>
-                <h3>Tell us about your goals</h3>
+                <h3>Tell us about your product &amp; goals</h3>
 
                 <div className="row2">
                   <div className={`field ${errors.name ? "has-error" : ""}`}>
@@ -173,6 +176,7 @@ export default function Contact() {
                       id="f-name"
                       name="name"
                       type="text"
+                      placeholder="John Doe"
                       autoComplete="name"
                       required
                       value={formData.name}
@@ -186,6 +190,7 @@ export default function Contact() {
                       id="f-email"
                       name="email"
                       type="email"
+                      placeholder="name@company.com"
                       autoComplete="email"
                       required
                       value={formData.email}
@@ -197,21 +202,21 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className={`field ${errors.company ? "has-error" : ""}`}>
-                  <label htmlFor="f-company">Company name</label>
-                  <input
-                    id="f-company"
-                    name="company"
-                    type="text"
-                    autoComplete="organization"
-                    required
-                    value={formData.company}
-                    onChange={handleChange}
-                  />
-                  <span className="err">Enter your company name.</span>
-                </div>
-
                 <div className="row2">
+                  <div className={`field ${errors.company ? "has-error" : ""}`}>
+                    <label htmlFor="f-company">Company name</label>
+                    <input
+                      id="f-company"
+                      name="company"
+                      type="text"
+                      placeholder="Acme Technologies"
+                      autoComplete="organization"
+                      required
+                      value={formData.company}
+                      onChange={handleChange}
+                    />
+                    <span className="err">Enter your company name.</span>
+                  </div>
                   <div className={`field ${errors.market ? "has-error" : ""}`}>
                     <label htmlFor="f-market">Target market</label>
                     <select
@@ -221,13 +226,34 @@ export default function Contact() {
                       value={formData.market}
                       onChange={handleChange}
                     >
-                      <option value="">Choose a market</option>
-                      <option value="North America">North America</option>
-                      <option value="EMEA">EMEA</option>
-                      <option value="APAC">APAC</option>
-                      <option value="Global">Global</option>
+                      <option value="" disabled>Choose a target market</option>
+                      <option value="North America (US & Canada)">North America (US &amp; Canada)</option>
+                      <option value="EMEA (UK & Europe)">EMEA (UK &amp; Europe)</option>
+                      <option value="APAC (Asia-Pacific)">APAC (Asia-Pacific)</option>
+                      <option value="Global Multi-Region">Global Multi-Region</option>
                     </select>
                     <span className="err">Choose a target market.</span>
+                  </div>
+                </div>
+
+                <div className="row2">
+                  <div className={`field ${errors.pod ? "has-error" : ""}`}>
+                    <label htmlFor="f-pod">Product / service category</label>
+                    <select
+                      id="f-pod"
+                      name="pod"
+                      required
+                      value={formData.pod}
+                      onChange={handleChange}
+                    >
+                      <option value="" disabled>Select product or service</option>
+                      <option value="B2B SaaS & Software Platform">B2B SaaS &amp; Software Platform</option>
+                      <option value="Cybersecurity & Infrastructure Auth">Cybersecurity &amp; Infrastructure Auth</option>
+                      <option value="AI & Digital Platform Technology">AI &amp; Digital Platform Technology</option>
+                      <option value="Enterprise Advisory & Professional Services">Enterprise Advisory &amp; Services</option>
+                      <option value="Custom Tech Solution / Other">Custom Tech Solution / Other</option>
+                    </select>
+                    <span className="err">Select product or service.</span>
                   </div>
                   <div className={`field ${errors.team ? "has-error" : ""}`}>
                     <label htmlFor="f-team">Current sales team size</label>
@@ -238,18 +264,19 @@ export default function Contact() {
                       value={formData.team}
                       onChange={handleChange}
                     >
-                      <option value="">Choose a size</option>
-                      <option value="No team yet">No team yet</option>
-                      <option value="1 to 5">1 to 5</option>
-                      <option value="6 to 20">6 to 20</option>
-                      <option value="20+">20+</option>
+                      <option value="" disabled>Choose your team size</option>
+                      <option value="No team yet (Founder-led)">No team yet (Founder-led)</option>
+                      <option value="1 to 5 SDRs/AEs">1 to 5 SDRs / AEs</option>
+                      <option value="6 to 20 sales team">6 to 20 sales team</option>
+                      <option value="20+ Enterprise Sales Org">20+ Enterprise Sales Org</option>
+                      <option value="Looking for fully outsourced pod">Looking for fully outsourced pod</option>
                     </select>
                     <span className="err">Choose your team size.</span>
                   </div>
                 </div>
 
                 <div className={`field ${errors.goal ? "has-error" : ""}`}>
-                  <label htmlFor="f-goal">Primary goal</label>
+                  <label htmlFor="f-goal">Primary commercial goal</label>
                   <select
                     id="f-goal"
                     name="goal"
@@ -257,13 +284,13 @@ export default function Contact() {
                     value={formData.goal}
                     onChange={handleChange}
                   >
-                    <option value="">Choose a goal</option>
-                    <option value="Generate pipeline">Generate pipeline</option>
-                    <option value="Close more deals">Close more deals</option>
-                    <option value="Build RevOps and CRM">
-                      Build RevOps and CRM
-                    </option>
-                    <option value="Other">Other</option>
+                    <option value="" disabled>Choose a primary goal</option>
+                    <option value="Accelerate enterprise pipeline">Accelerate enterprise pipeline</option>
+                    <option value="Enter new geographic market">Enter new geographic market</option>
+                    <option value="Outsource outbound SDR function">Outsource outbound SDR function</option>
+                    <option value="Close high-value enterprise deals">Close high-value enterprise deals</option>
+                    <option value="Build RevOps and CRM">Build RevOps and CRM</option>
+                    <option value="Other custom requirement">Other custom requirement</option>
                   </select>
                   <span className="err">Choose a primary goal.</span>
                 </div>
@@ -275,17 +302,18 @@ export default function Contact() {
                   <textarea
                     id="f-msg"
                     name="message"
+                    rows={3}
+                    placeholder="Tell us about your product, deal size, or target timeline..."
                     value={formData.message}
                     onChange={handleChange}
                   ></textarea>
                 </div>
 
                 <button className="btn btn--navy" type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "Submitting..." : "Book my growth strategy call"}
+                  {isSubmitting ? "Submitting..." : "Book my growth strategy call \u2192"}
                 </button>
                 <p className="form-note">
-                  We reply within one business day. Your details are never
-                  shared.
+                  We reply within one business day. 100% confidential. Your details are never shared.
                 </p>
               </form>
             ) : (
@@ -303,8 +331,7 @@ export default function Contact() {
                 </svg>
                 <h3>Thank you. We have your request.</h3>
                 <p>
-                  Our team will be in touch shortly to confirm your strategy
-                  session.
+                  Our team will be in touch within 24 hours to review your commercial blueprint and schedule your strategy call.
                 </p>
               </div>
             )}
