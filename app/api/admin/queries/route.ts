@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAdminSession } from "@/lib/auth";
-import { getAllQueries, updateQueryStatus, deleteQuery } from "@/lib/storage";
+import { getAllQueries, updateQuery, deleteQuery } from "@/lib/storage";
 
 export async function GET() {
   const session = await getAdminSession();
@@ -24,16 +24,16 @@ export async function PATCH(request: Request) {
 
   try {
     const body = await request.json();
-    const { id, status, notes } = body;
+    const { id, ...updates } = body;
 
-    if (!id || !status) {
+    if (!id) {
       return NextResponse.json(
-        { error: "Query ID and status are required." },
+        { error: "Query ID is required." },
         { status: 400 }
       );
     }
 
-    const updated = updateQueryStatus(id, status, notes);
+    const updated = updateQuery(id, updates);
     if (!updated) {
       return NextResponse.json(
         { error: "Query not found." },
@@ -43,6 +43,7 @@ export async function PATCH(request: Request) {
 
     return NextResponse.json({
       success: true,
+      message: "Query updated successfully.",
       data: updated,
     });
   } catch (error) {
@@ -53,6 +54,8 @@ export async function PATCH(request: Request) {
     );
   }
 }
+
+export const PUT = PATCH;
 
 export async function DELETE(request: Request) {
   const session = await getAdminSession();

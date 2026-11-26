@@ -6,8 +6,8 @@ const SESSION_MAX_AGE = 60 * 60 * 24 * 7; // 7 days
 
 function getSecretKey(): string {
   return (
-    process.env.ADMIN_PASSWORD ||
     process.env.SESSION_SECRET ||
+    process.env.ADMIN_PASSWORD ||
     "afa-technologies-enterprise-admin-secret-key-2026"
   );
 }
@@ -95,8 +95,13 @@ export async function clearAdminSession(): Promise<void> {
 }
 
 export function validateCredentials(user: string, pass: string): boolean {
-  const validUser = process.env.ADMIN_USERNAME || "admin";
-  const validPass = process.env.ADMIN_PASSWORD || "admin123";
+  const inputUser = user.trim().toLowerCase();
+  const validUser = (process.env.ADMIN_USERNAME || "admin").trim().toLowerCase();
+  const validEmail = (process.env.ADMIN_EMAIL || "").trim().toLowerCase();
+  const validPass = (process.env.ADMIN_PASSWORD || "admin123").trim();
 
-  return user.trim() === validUser.trim() && pass === validPass;
+  const userMatches =
+    inputUser === validUser || (validEmail !== "" && inputUser === validEmail);
+
+  return userMatches && pass.trim() === validPass;
 }

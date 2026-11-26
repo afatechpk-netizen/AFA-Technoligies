@@ -8,6 +8,7 @@ export interface ContactQuery {
   email: string;
   company: string;
   market: string;
+  phone?: string;
   pod?: string;
   team?: string;
   goal?: string;
@@ -31,6 +32,7 @@ const initialSeedQueries: ContactQuery[] = [
     email: "a.vance@cybershield.io",
     company: "CyberShield Enterprise",
     market: "North America (US & Canada)",
+    phone: "+1 (415) 890-2341",
     pod: "Cybersecurity & Infrastructure Auth",
     source: "Hero Lead Form",
     status: "New",
@@ -43,6 +45,7 @@ const initialSeedQueries: ContactQuery[] = [
     email: "smartinez@apexplatform.ai",
     company: "Apex Conversational AI",
     market: "EMEA (UK & Europe)",
+    phone: "+44 20 7946 0912",
     team: "Full Growth Pod (SDRs + AEs)",
     goal: "Expand enterprise pipeline across UK and DACH regions",
     message: "We have proven product-market fit in Spain and want AFA Technologies to ramp our sales pipeline across UK and Germany.",
@@ -57,6 +60,7 @@ const initialSeedQueries: ContactQuery[] = [
     email: "m.sterling@keystoneadvisory.co.uk",
     company: "Sterling Global Partners",
     market: "Global Multi-Region",
+    phone: "+44 161 496 0123",
     pod: "Enterprise Advisory & Professional Services",
     source: "Hero Lead Form",
     status: "Qualified",
@@ -138,24 +142,33 @@ export function addQuery(
   return newQuery;
 }
 
-export function updateQueryStatus(
+export function updateQuery(
   id: string,
-  status: ContactQuery["status"],
-  notes?: string
+  updates: Partial<Omit<ContactQuery, "id" | "createdAt">>
 ): ContactQuery | null {
   const queries = getAllQueries();
   const index = queries.findIndex((q) => q.id === id);
   if (index === -1) return null;
 
-  queries[index].status = status;
-  if (typeof notes === "string") {
-    queries[index].notes = notes;
-  }
+  queries[index] = {
+    ...queries[index],
+    ...updates,
+    id: queries[index].id,
+    createdAt: queries[index].createdAt,
+  };
 
   globalThis.__afa_queries_cache = queries;
   saveToDisk(queries);
 
   return queries[index];
+}
+
+export function updateQueryStatus(
+  id: string,
+  status: ContactQuery["status"],
+  notes?: string
+): ContactQuery | null {
+  return updateQuery(id, { status, ...(typeof notes === "string" ? { notes } : {}) });
 }
 
 export function deleteQuery(id: string): boolean {
