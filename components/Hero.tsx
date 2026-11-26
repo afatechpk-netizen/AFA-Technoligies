@@ -118,48 +118,45 @@ export default function Hero() {
       <div className="wrap">
         <div className="hero-copy hero-slide-in-left">
           <div className="hero-pill">
-            <span className="pill-pulse-dot"></span>
-            Dedicated B2B Sales Partner for Global Tech Companies
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span>B2B Commercial Sales Partner &bull; The Bridge Between Tech &amp; Enterprise Buyers</span>
           </div>
 
           <h1>
-            We Sell Your B2B Tech Products
+            We Sell Your Tech Products &amp; Services
             <br />
-            <span className="typewriter-text gradient-heading">
-              {typewriterWords[wordIdx].substring(0, charIdx)}
-              <span className="typewriter-cursor">|</span>
+            <span className="hero-highlight">
+              <span>{typewriterWords[wordIdx].substring(0, charIdx)}</span>
+              <span className="cursor-blink"></span>
             </span>
           </h1>
 
-          <p className="hero-lead">
-            AFA Technologies acts as the dedicated commercial bridge between your technology and global enterprise decision-makers. You focus on building great products &mdash; we secure qualified buyers and accelerate revenue.
+          <p className="lead">
+            <strong>You build the technology &mdash; we generate the revenue.</strong> AFA Technologies is the commercial sales engine bridging high-growth B2B products and services with qualified enterprise buyers worldwide. Our dedicated outbound pods represent your brand, book high-intent meetings, and close deals.
           </p>
 
-          <div className="cta-cluster">
-            <a className="btn btn--primary" href="#contact">
-              Deploy a Dedicated Sales Pod &rarr;
+          <div className="hero-cta">
+            <a className="btn-talk" href="#hero-lead-form">
+              Get Sales Team Blueprint <span>&rarr;</span>
             </a>
-            <a className="btn btn--glass" href="#client-impact">
-              View Verified Client Results
+            <a className="btn-explore" href="#solutions">
+              How We Sell For You
             </a>
           </div>
 
-          <div className="hero-highlights">
-            <div className="hero-stat-card">
-              <span className="hero-stat-val">14 Days</span>
-              <span className="hero-stat-lbl">To Launch Dedicated Pod</span>
-            </div>
-            <div className="hero-stat-card">
-              <span className="hero-stat-val">4.8&times;</span>
-              <span className="hero-stat-lbl">Avg. Pipeline Velocity</span>
-            </div>
-            <div className="hero-stat-card">
-              <span className="hero-stat-val">100%</span>
-              <span className="hero-stat-lbl">Outcome Alignment</span>
-            </div>
-          </div>
-
-          <ul className="hero-trust-bullets">
+          <ul className="proof-list">
             <li>
               <svg
                 viewBox="0 0 20 20"
@@ -172,7 +169,7 @@ export default function Hero() {
               >
                 <path d="M4 10.5l4 4 8-9" />
               </svg>
-              Enterprise-grade sales infrastructure
+              We sell your products for you (Dedicated Sales Pods)
             </li>
             <li>
               <svg
@@ -186,7 +183,7 @@ export default function Hero() {
               >
                 <path d="M4 10.5l4 4 8-9" />
               </svg>
-              Global multi-region outbound reach
+              Direct C-suite buyer access &amp; qualified enterprise meetings
             </li>
             <li>
               <svg
