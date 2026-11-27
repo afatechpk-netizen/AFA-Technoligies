@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import HeroPillars from "@/components/HeroPillars";
 import Proof from "@/components/Proof";
 import Advantage from "@/components/Advantage";
 import Solutions from "@/components/Solutions";
@@ -18,6 +19,7 @@ export default function Home() {
       <Header />
       <main id="main">
         <Hero />
+        <HeroPillars />
         <Proof />
         <ClientImpact />
         <Solutions />
