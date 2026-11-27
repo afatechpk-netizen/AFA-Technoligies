@@ -312,7 +312,7 @@ export default function Contact() {
                       value={formData.team}
                       onChange={handleChange}
                     >
-                      <option value="">Choose your team size</option>
+                      <option value="">Choose your team</option>
                       <option value="No team yet (Founder-led)">
                         No team yet (Founder-led)
                       </option>

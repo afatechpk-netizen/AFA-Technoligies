@@ -144,7 +144,8 @@ export default function Hero() {
           </h1>
 
           <p className="lead">
-            <strong>You build the technology &mdash; we generate the revenue.</strong> AFA Technologies is the commercial sales engine bridging high-growth B2B products and services with qualified enterprise buyers worldwide. Our dedicated outbound pods represent your brand, book high-intent meetings, and close deals.
+            <strong>You build the technology. We help you sell it.</strong>
+            AFA Technologies is a B2B sales partner for companies with market-ready technology products and services. We sell your products and services to enterprise buyers on your behalf.
           </p>
 
           <div className="hero-cta">
@@ -431,7 +432,7 @@ export default function Hero() {
               </div>
             </form>
           ) : (
-            <div className="hero-form-done is-shown" role="status" aria-live="polite">
+              <div className="hero-form-done is-shown" role="status" aria-live="polite">
               <svg
                 viewBox="0 0 48 48"
                 fill="none"
@@ -450,6 +451,52 @@ export default function Hero() {
               </p>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Bottom 3-column Value Strip */}
+      <div className="wrap hero-strip-wrap">
+        <div className="hero-bottom-strip">
+          <div className="hero-strip-item">
+            <span className="hero-strip-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                <polyline points="2 12 12 17 22 12" />
+                <polyline points="2 17 12 22 22 17" />
+              </svg>
+            </span>
+            <div>
+              <b>Dedicated Sales Pods</b>
+              <span>Represent your brand in target markets</span>
+            </div>
+          </div>
+
+          <div className="hero-strip-item">
+            <span className="hero-strip-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </span>
+            <div>
+              <b>Direct Buyer Access</b>
+              <span>Qualified enterprise meetings</span>
+            </div>
+          </div>
+
+          <div className="hero-strip-item">
+            <span className="hero-strip-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </span>
+            <div>
+              <b>Live in 14 Days</b>
+              <span>Zero in-house hiring overhead</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
