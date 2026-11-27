@@ -29,72 +29,72 @@ interface PipelinePreviewItem {
 
 const pipelineItems: PipelinePreviewItem[] = [
   {
-    id: "fintech",
-    title: "Global FinTech Bank",
-    meta: "CISO • today 09:12",
-    status: "3 buyers mapped",
+    id: "icp",
+    title: "1. Find Your Buyers",
+    meta: "Week 1 • Target ICP",
+    status: "50+ accounts",
     statusTone: "blue",
-    floatTitle: "Enterprise Account Matched",
-    floatSub: "CISO brief • ready for executive call",
-    summaryBefore: "Dedicated AFA outbound pod engaged ",
-    highlight1: "CISO & VP SecOps",
-    summaryMid: " with technical security briefs. Decision-makers verified for ",
-    highlight2: "$180K ACV",
-    summaryAfter: " enterprise deployment.",
-    signalTitle: "Executive Discovery Call",
-    signalMeta: "NA Enterprise Pod • 14-Day Launch",
-    signalStatus: "Verified",
+    floatTitle: "How AFA Sells Your Product",
+    floatSub: "Step 1 of 4 • Verified buyer list ready",
+    summaryBefore: "We research your market and identify the exact ",
+    highlight1: "C-Suite decision-makers",
+    summaryMid: " who need your product, building a verified list of ",
+    highlight2: "high-intent companies",
+    summaryAfter: " ready for outreach.",
+    signalTitle: "Target Buyer & Account List",
+    signalMeta: "CTOs, CISOs, VPs & Founders in your target market",
+    signalStatus: "Included",
   },
   {
-    id: "cloudscale",
-    title: "CloudScale Infra",
-    meta: "VP Cyber • today 08:47",
-    status: "Demo booked",
+    id: "outreach",
+    title: "2. Run Outbound",
+    meta: "Email + LinkedIn + Calls",
+    status: "Active",
     statusTone: "blue",
-    floatTitle: "High-Intent Demo Scheduled",
-    floatSub: "VP Infrastructure • calendar confirmed",
-    summaryBefore: "Multi-touch LinkedIn and executive email sequence converted ",
-    highlight1: "VP Global Defense",
-    summaryMid: " into a technical POV evaluation worth ",
-    highlight2: "$120K ACV",
-    summaryAfter: " in Q2 pipeline.",
-    signalTitle: "Technical POV Session",
-    signalMeta: "EMEA Security Pod • Direct Access",
-    signalStatus: "Confirmed",
+    floatTitle: "How AFA Sells Your Product",
+    floatSub: "Step 2 of 4 • Multi-channel outreach live",
+    summaryBefore: "Our dedicated sales pod reaches out under ",
+    highlight1: "your brand name",
+    summaryMid: " using tailored emails, LinkedIn, and executive calls to spark ",
+    highlight2: "real buyer conversations",
+    summaryAfter: ".",
+    signalTitle: "Dedicated Outbound Sales Pod",
+    signalMeta: "Trained SDRs & closers representing your company",
+    signalStatus: "Included",
   },
   {
-    id: "apex-ai",
-    title: "Apex AI Enterprise",
-    meta: "CTO • yesterday",
-    status: "Qualified",
+    id: "demos",
+    title: "3. Book Sales Calls",
+    meta: "Qualified Decision-Makers",
+    status: "Booked",
     statusTone: "green",
-    floatTitle: "Pilot Scope Approved",
-    floatSub: "CTO & Ops • proposal delivered",
-    summaryBefore: "ICP segmentation across UK & Middle East connected ",
-    highlight1: "Chief Technology Officer",
-    summaryMid: " with your solution architects for a ",
-    highlight2: "$210K ACV",
-    summaryAfter: " enterprise rollout.",
-    signalTitle: "Commercial Proposal Sent",
-    signalMeta: "Multi-Region Pod • CRM Synced",
-    signalStatus: "Accepted",
+    floatTitle: "How AFA Sells Your Product",
+    floatSub: "Step 3 of 4 • Meetings on your calendar",
+    summaryBefore: "Every prospect is pre-qualified for budget and need before we ",
+    highlight1: "book the demo",
+    summaryMid: " directly onto your calendar — so you only speak with ",
+    highlight2: "serious buyers",
+    summaryAfter: ".",
+    signalTitle: "Qualified Enterprise Meetings",
+    signalMeta: "Pre-screened buyers with active need & budget",
+    signalStatus: "Booked",
   },
   {
-    id: "keystone",
-    title: "Keystone Advisory",
-    meta: "Managing Partner • yesterday",
-    status: "Qualified",
+    id: "pipeline",
+    title: "4. Close Revenue",
+    meta: "Full Pipeline Support",
+    status: "Live",
     statusTone: "green",
-    floatTitle: "New Vertical Penetrated",
-    floatSub: "Managing Partner • mandate active",
-    summaryBefore: "Executive outreach opened 4 new enterprise verticals, booking ",
-    highlight1: "C-Suite Advisory Briefs",
-    summaryMid: " while freeing partners to close ",
-    highlight2: "$160K+ ACV",
-    summaryAfter: " retainers.",
-    signalTitle: "Partner Mandate Review",
-    signalMeta: "Advisory Growth Pod • Live",
-    signalStatus: "Accepted",
+    floatTitle: "How AFA Sells Your Product",
+    floatSub: "Step 4 of 4 • Predictable B2B revenue",
+    summaryBefore: "We manage follow-ups, CRM tracking, and deal progression to turn ",
+    highlight1: "qualified demos",
+    summaryMid: " into signed contracts and ",
+    highlight2: "predictable monthly revenue",
+    summaryAfter: ".",
+    signalTitle: "Full CRM & Deal Reporting",
+    signalMeta: "Weekly pipeline visibility without hiring overhead",
+    signalStatus: "Live",
   },
 ];
 
@@ -223,12 +223,12 @@ export default function Hero() {
           </ul>
         </div>
 
-        {/* Right Side: Interactive Split-Panel GTM Workspace Showcase */}
+        {/* Right Side: Clear 4-Step Sales Engine Interactive Card */}
         <div
           className="hero-engine-stage hero-slide-in-right"
-          aria-label="AFA Commercial Engine Interactive Preview"
+          aria-label="How AFA Technologies Sells Your Product"
         >
-          {/* Floating Dark Notification Badge */}
+          {/* Floating Dark Header Pill */}
           <div className="hero-engine-toast" role="status" aria-live="polite">
             <span className="hero-engine-toast-icon" aria-hidden="true">
               <svg
@@ -252,7 +252,7 @@ export default function Hero() {
           </div>
 
           <div className="hero-engine-card">
-            {/* Left Sidebar: Pipeline List */}
+            {/* Left Sidebar: 4 Simple Steps */}
             <div className="hero-engine-sidebar">
               <div className="hero-engine-sidebar-head">
                 <svg
@@ -266,13 +266,14 @@ export default function Hero() {
                   strokeLinejoin="round"
                   aria-hidden="true"
                 >
-                  <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
-                  <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+                  <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                  <polyline points="2 12 12 17 22 12" />
+                  <polyline points="2 17 12 22 22 17" />
                 </svg>
-                <span>Pipeline</span>
+                <span>Your Sales Pod</span>
               </div>
 
-              <div className="hero-engine-list" role="tablist" aria-label="Sample enterprise accounts">
+              <div className="hero-engine-list" role="tablist" aria-label="4-step sales process">
                 {pipelineItems.map((item, idx) => (
                   <button
                     key={item.id}
@@ -300,7 +301,7 @@ export default function Hero() {
             <div className="hero-engine-detail" role="tabpanel">
               <div className="hero-engine-detail-head">
                 <h4>{activeItem.title}</h4>
-                <span className="hero-engine-badge">Live Pod View</span>
+                <span className="hero-engine-badge">14-Day Launch</span>
               </div>
 
               <div className="hero-engine-summary">
@@ -313,7 +314,7 @@ export default function Hero() {
                 </p>
               </div>
 
-              <div className="hero-engine-section-label">QUALIFIED BUYER SIGNALS</div>
+              <div className="hero-engine-section-label">WHAT YOU GET</div>
 
               <div className="hero-engine-signal-card">
                 <div className="hero-engine-signal-info">
@@ -330,7 +331,7 @@ export default function Hero() {
 
               <div className="hero-engine-footer">
                 <span className="hero-engine-footer-note">
-                  Full CRM sync &amp; executive visibility
+                  Zero hiring &bull; Full CRM visibility
                 </span>
                 <a href="#contact" className="hero-engine-cta">
                   Book Strategy Call
