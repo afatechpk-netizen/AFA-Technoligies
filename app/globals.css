@@ -1823,7 +1823,7 @@ ul{margin:0;padding:0;list-style:none}
 /* Responsive Breakpoints */
 @media (max-width: 992px) {
   .accel-cases-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 20px;
   }
 
@@ -2004,6 +2004,12 @@ ul{margin:0;padding:0;list-style:none}
 .agenda svg{flex:none;width:22px;height:22px;margin-top:2px;color:var(--cyan)}
 .contact-alt{margin-top:30px;color:#9fb8cc;font-size:.98rem}
 .contact-alt a{color:var(--cyan-soft)}
+.contact-direct{margin-top:28px;display:flex;flex-direction:column;gap:10px}
+.contact-direct-title{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8faec4;margin-bottom:2px}
+.contact-direct-link{display:inline-flex;align-items:center;gap:12px;color:#e8f4fc;text-decoration:none;font-size:.98rem;font-weight:500;width:fit-content;max-width:100%;word-break:break-word;transition:color .2s ease,transform .2s ease}
+.contact-direct-link:hover{color:var(--cyan);transform:translateX(3px)}
+.contact-direct-icon{width:34px;height:34px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;background:rgba(10,212,255,.12);border:1px solid rgba(10,212,255,.28);color:var(--cyan);flex-shrink:0}
+.advisor-sketch-circle{width:48px;height:48px;border-radius:50%;border:2px solid var(--cyan);background:rgba(10,212,255,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--cyan);overflow:hidden}
 .form-card{position:relative;background:#fff;color:var(--ink);border-radius:20px;padding:clamp(22px,3vw,38px)}
 .form-card h3{font-size:1.45rem;margin-bottom:20px}
 .field{margin-bottom:16px}
@@ -4427,4 +4433,387 @@ img, svg, video, iframe { max-width: 100%; }
   .hero-img { height: 220px; }
   .pod-thumb { height: 140px; }
   .about-office-card img { height: 160px; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   PRECISION MOBILE RESPONSIVENESS — Full Site (All Sections)
+   Targets real class names from components
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Global overflow prevention ── */
+html { overflow-x: clip; }
+body { overflow-x: clip; max-width: 100%; }
+* { box-sizing: border-box; }
+img, video, canvas, svg { max-width: 100%; }
+
+/* ── Grid min-width: 0 safety ── */
+.hero-copy,
+.hero-form-card,
+.accel-tablist-sidebar,
+.accel-showcase-container,
+.accel-col-content,
+.accel-col-mockup,
+.accel-mockup-window,
+.mockup-window-body,
+.mockup-kanban-deck,
+.accel-feat-box,
+.contact-copy,
+.form-card,
+.battle-card {
+  min-width: 0;
+  max-width: 100%;
+}
+.mockup-window-title {
+  min-width: 0;
+  flex: 1;
+}
+
+/* ── 1024px: Laptop → Tablet ── */
+@media (max-width: 1024px) {
+  /* Hero: stack form below text */
+  .hero .wrap {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 36px !important;
+  }
+  .hero-form-card {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-inline: auto;
+  }
+  .hero-bg-accent { display: none !important; }
+
+  /* ClientImpact: case panel → single column */
+  .accel-case-panel {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 32px !important;
+  }
+  /* Why/About/Contact → single column */
+  .why, .about, .contact-panel {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 32px !important;
+  }
+  /* Comparison cards → single column */
+  .battle-container {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 24px !important;
+  }
+}
+
+/* ── 900px: Tablet portrait ── */
+@media (max-width: 900px) {
+  /* Process steps → vertical */
+  .steps {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+  /* Solutions pods grid → single column */
+  .pods {
+    grid-template-columns: 1fr !important;
+  }
+  /* About */
+  .about {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── 768px: Mobile landscape / tablet portrait ── */
+@media (max-width: 768px) {
+  /* Hero text */
+  .hero h1 {
+    font-size: clamp(1.8rem, 5.5vw, 2.6rem) !important;
+    letter-spacing: -0.025em !important;
+  }
+  .hero .lead {
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem) !important;
+  }
+  .hero-cta {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+  .btn-talk, .btn-explore {
+    text-align: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    display: inline-flex !important;
+  }
+  .proof-list {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  /* Section headings */
+  .section-head h2 {
+    font-size: clamp(1.5rem, 5vw, 2.2rem) !important;
+  }
+  .section-head p {
+    font-size: 0.95rem !important;
+  }
+
+  /* Pods (solutions) */
+  .pod {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  /* Client Impact: tabs go horizontal scrollable without blowing out grid */
+  .accel-cases-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+  }
+  .accel-tablist-sidebar {
+    position: static !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .accel-tablist-vertical {
+    flex-direction: row !important;
+    display: inline-flex !important;
+    border-radius: 999px !important;
+    padding: 6px !important;
+    gap: 6px !important;
+    white-space: nowrap !important;
+    width: max-content !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+  .accel-tablist-vertical .accel-tab-pill {
+    width: auto !important;
+    min-height: auto !important;
+    padding: 8px 16px !important;
+    border-radius: 999px !important;
+    flex-shrink: 0 !important;
+    transform: none !important;
+  }
+  .accel-tablist-vertical .accel-tab-pill.is-active {
+    transform: none !important;
+  }
+
+  /* Mockup window: readable on mobile */
+  .accel-mockup-window {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+  .mockup-window-header {
+    padding: 11px 14px !important;
+    gap: 10px !important;
+  }
+  .mockup-window-title {
+    font-size: 0.72rem !important;
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+  .mockup-window-body {
+    padding: 14px 12px !important;
+  }
+  .mockup-status-banner {
+    font-size: 0.75rem !important;
+    padding: 9px 11px !important;
+    word-break: break-word !important;
+  }
+  .mockup-deal-card {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* Why AFA */
+  .why {
+    grid-template-columns: 1fr !important;
+  }
+  .cover {
+    position: static !important;
+  }
+  .cover-row, .axis {
+    grid-template-columns: 50px 1fr !important;
+  }
+
+  /* About */
+  .about {
+    grid-template-columns: 1fr !important;
+  }
+  .about-office-card img {
+    height: 200px !important;
+  }
+
+  /* Contact */
+  .contact-panel {
+    grid-template-columns: 1fr !important;
+    padding: clamp(28px, 5vw, 48px) clamp(20px, 4vw, 36px) !important;
+  }
+
+  /* Metrics */
+  .metrics {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Comparison battle cards */
+  .battle-container {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* FAQ */
+  .faq-wrap, .faq-list {
+    max-width: 100% !important;
+  }
+
+  /* Row2 (hero form 2-col rows) */
+  .row2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Proof/metrics */
+  .row2, .metrics-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── 640px: Mobile ── */
+@media (max-width: 640px) {
+  /* General spacing */
+  .section, section { padding-block: clamp(44px, 8vw, 72px) !important; }
+  .wrap { --gutter: 16px !important; }
+
+  /* Hero */
+  .hero h1 {
+    font-size: clamp(1.5rem, 7vw, 2rem) !important;
+  }
+  .hero-highlight {
+    white-space: normal !important;
+    word-break: break-word !important;
+    max-width: 100% !important;
+  }
+  .hero-pill {
+    font-size: 0.78rem !important;
+    padding: 6px 12px !important;
+    white-space: normal !important;
+    line-height: 1.35 !important;
+    max-width: 100% !important;
+  }
+  .hero-form-card {
+    padding: 20px 16px !important;
+    border-radius: 16px !important;
+  }
+  .hero-form-card h3 { font-size: 1.1rem !important; }
+  .hero-form-desc { font-size: 0.88rem !important; }
+  .hero-form-trust { flex-wrap: wrap !important; gap: 8px !important; }
+
+  /* Pods full-width */
+  .pods { grid-template-columns: 1fr !important; }
+  .pod { grid-template-columns: 1fr !important; }
+  .pod-thumb { max-height: 180px !important; }
+
+  /* Accel features grid */
+  .accel-features-grid { grid-template-columns: minmax(0, 1fr) !important; }
+
+  /* Mockup deals stacked */
+  .mockup-deal-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .deal-card-right {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding-top: 6px !important;
+    border-top: 1px dashed rgba(10,30,56,0.1) !important;
+  }
+
+  /* Metrics: 1 col */
+  .metrics { grid-template-columns: 1fr !important; }
+
+  /* Steps */
+  .steps { grid-template-columns: 1fr !important; }
+
+  /* Compare table */
+  .compare { font-size: 0.82rem !important; }
+  .compare th, .compare td { padding: 10px 8px !important; }
+
+  /* About image */
+  .about-office-card img { height: 160px !important; }
+
+  /* Contact form full-width */
+  .contact-form { width: 100% !important; }
+
+  /* Section headings */
+  .section-head h2 { font-size: clamp(1.3rem, 6.5vw, 1.9rem) !important; }
+
+  /* Policy bar */
+  .sf-policy-inner { flex-direction: column !important; align-items: flex-start !important; }
+  .sf-policy-links { flex-wrap: wrap !important; gap: 6px !important; font-size: 0.8rem !important; }
+  .sf-copyright { font-size: 0.8rem !important; }
+
+  /* Footer logo */
+  .sf-logo { height: 90px !important; }
+}
+
+/* ── 480px: Small phone ── */
+@media (max-width: 480px) {
+  .hero h1 { font-size: clamp(1.3rem, 8vw, 1.8rem) !important; }
+
+  /* Accel tab pills on small phone — make them smaller */
+  .accel-tablist-vertical .accel-tab-pill {
+    padding: 7px 12px !important;
+    font-size: 0.82rem !important;
+  }
+  .partner-logo-text { font-size: 0.85rem !important; }
+
+  /* Showcase container tighter padding */
+  .accel-showcase-container {
+    padding: 18px 14px !important;
+    border-radius: 18px !important;
+  }
+  .accel-feat-box {
+    padding: 12px !important;
+    gap: 10px !important;
+  }
+  .mockup-kanban-headers {
+    gap: 6px !important;
+    padding: 0 !important;
+  }
+  .kanban-col-head {
+    font-size: 0.64rem !important;
+    gap: 4px !important;
+    min-width: 0 !important;
+    flex-wrap: wrap !important;
+  }
+  .mockup-window-footer {
+    padding: 14px 10px !important;
+    gap: 8px !important;
+  }
+  .mockup-stat-val {
+    font-size: 1.15rem !important;
+  }
+  .mockup-stat-label {
+    font-size: 0.68rem !important;
+  }
+
+  /* Why AFA timezone chart */
+  .cover-row, .axis {
+    grid-template-columns: 44px 1fr !important;
+  }
+  .axis span { font-size: 0.65rem !important; }
+
+  /* Battle cards */
+  .battle-card { padding: 20px !important; }
+
+  /* Buttons */
+  .btn, .btn-talk, .btn-explore {
+    padding: 12px 18px !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* Row2 always single */
+  .row2 { grid-template-columns: 1fr !important; }
+
+  /* Hero form trust row */
+  .hero-form-trust {
+    flex-direction: column !important;
+    gap: 6px !important;
+    font-size: 0.8rem !important;
+  }
 }

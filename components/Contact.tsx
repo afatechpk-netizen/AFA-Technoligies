@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -9,17 +8,19 @@ export default function Contact() {
     email: "",
     company: "",
     market: "",
-    pod: "",
     team: "",
     goal: "",
+    pod: "",
     message: "",
   });
   const [errors, setErrors] = useState<Record<string, boolean>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
     const newErrors: Record<string, boolean> = {};
 
     if (!formData.name.trim()) newErrors.name = true;
@@ -31,16 +32,15 @@ export default function Contact() {
     }
     if (!formData.company.trim()) newErrors.company = true;
     if (!formData.market) newErrors.market = true;
-    if (!formData.pod) newErrors.pod = true;
-    if (!formData.team) newErrors.team = true;
     if (!formData.goal) newErrors.goal = true;
+    if (!formData.pod.trim()) newErrors.pod = true;
 
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
       try {
-        await fetch("/api/contact", {
+        const res = await fetch("/api/contact", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -48,18 +48,30 @@ export default function Contact() {
             email: formData.email,
             company: formData.company,
             market: formData.market,
-            pod: formData.pod,
-            team: formData.team,
+            team: formData.team || undefined,
             goal: formData.goal,
+            pod: formData.pod,
             message: formData.message,
+            recipient: "sales@afatechnologiesltd.com",
             source: "Contact Section",
           }),
         });
+
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || "Unable to submit your request right now.");
+        }
+
+        setIsSubmitted(true);
       } catch (err) {
         console.warn("Contact form submission error:", err);
+        setSubmitError(
+          err instanceof Error
+            ? err.message
+            : "Something went wrong. Please try again or email sales@afatechnologiesltd.com."
+        );
       } finally {
         setIsSubmitting(false);
-        setIsSubmitted(true);
       }
     }
   };
@@ -74,6 +86,7 @@ export default function Contact() {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: false }));
     }
+    if (submitError) setSubmitError(null);
   };
 
   return (
@@ -101,6 +114,7 @@ export default function Contact() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  aria-hidden="true"
                 >
                   <path d="M4 11.5l4.5 4.5L18 6" />
                 </svg>
@@ -114,6 +128,7 @@ export default function Contact() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  aria-hidden="true"
                 >
                   <path d="M4 11.5l4.5 4.5L18 6" />
                 </svg>
@@ -127,6 +142,7 @@ export default function Contact() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  aria-hidden="true"
                 >
                   <path d="M4 11.5l4.5 4.5L18 6" />
                 </svg>
@@ -134,31 +150,72 @@ export default function Contact() {
               </li>
             </ul>
 
-            <p className="contact-alt">
-              Prefer direct outreach? Write to{" "}
-              <a href="mailto:hello@afatechnologiesltd.com">
-                hello@afatechnologiesltd.com
-              </a>{" "}
-              or call{" "}
-              <a href="tel:+923436622666">
-                +92 343 6622666
+            <div className="contact-direct">
+              <div className="contact-direct-title">Contact us directly</div>
+              <a
+                className="contact-direct-link"
+                href="mailto:sales@afatechnologiesltd.com"
+              >
+                <span className="contact-direct-icon" aria-hidden="true">
+                  <svg
+                    width="17"
+                    height="17"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </span>
+                <span>sales@afatechnologiesltd.com</span>
               </a>
-            </p>
+              <a className="contact-direct-link" href="tel:+923243001171">
+                <span className="contact-direct-icon" aria-hidden="true">
+                  <svg
+                    width="17"
+                    height="17"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                </span>
+                <span>+92 324 3001171</span>
+              </a>
+            </div>
 
             <div className="contact-advisor">
-              <Image
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
-                alt="AFA Technologies Senior GTM Sales Strategist"
-                className="advisor-avatar"
-                width={48}
-                height={48}
-                loading="lazy"
-              />
+              <div className="advisor-sketch-circle" aria-hidden="true">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {/* Passport-style line sketch: head/face, neck, shoulders & upper chest */}
+                  <path d="M20 9c-3.4 0-5.8 2.5-5.8 6.1 0 3.5 2.4 6.4 5.8 6.4s5.8-2.9 5.8-6.4C25.8 11.5 23.4 9 20 9z" />
+                  <path d="M17.2 21.2v2.4M22.8 21.2v2.4" />
+                  <path d="M8.5 36.5c.8-5.8 4.9-9.5 11.5-9.5s10.7 3.7 11.5 9.5" />
+                  <path d="M15.8 27.3 20 31.8l4.2-4.5" />
+                </svg>
+              </div>
               <div>
                 <b>Direct GTM Leadership Access</b>
                 <span>
-                  Speak directly with our senior pipeline strategists &mdash; no
-                  junior qualifiers.
+                  Speak directly with our senior pipeline strategists. No junior
+                  qualifiers.
                 </span>
               </div>
             </div>
@@ -167,7 +224,7 @@ export default function Contact() {
           <div className="form-card reveal-slide-right">
             {!isSubmitted ? (
               <form id="lead-form" noValidate onSubmit={handleSubmit}>
-                <h3>Tell us about your product &amp; goals</h3>
+                <h3>Tell us about your goals</h3>
 
                 <div className="row2">
                   <div className={`field ${errors.name ? "has-error" : ""}`}>
@@ -202,21 +259,22 @@ export default function Contact() {
                   </div>
                 </div>
 
+                <div className={`field ${errors.company ? "has-error" : ""}`}>
+                  <label htmlFor="f-company">Company name</label>
+                  <input
+                    id="f-company"
+                    name="company"
+                    type="text"
+                    placeholder="Acme Technologies"
+                    autoComplete="organization"
+                    required
+                    value={formData.company}
+                    onChange={handleChange}
+                  />
+                  <span className="err">Enter your company name.</span>
+                </div>
+
                 <div className="row2">
-                  <div className={`field ${errors.company ? "has-error" : ""}`}>
-                    <label htmlFor="f-company">Company name</label>
-                    <input
-                      id="f-company"
-                      name="company"
-                      type="text"
-                      placeholder="Acme Technologies"
-                      autoComplete="organization"
-                      required
-                      value={formData.company}
-                      onChange={handleChange}
-                    />
-                    <span className="err">Enter your company name.</span>
-                  </div>
                   <div className={`field ${errors.market ? "has-error" : ""}`}>
                     <label htmlFor="f-market">Target market</label>
                     <select
@@ -226,57 +284,54 @@ export default function Contact() {
                       value={formData.market}
                       onChange={handleChange}
                     >
-                      <option value="" disabled>Choose a target market</option>
-                      <option value="North America (US & Canada)">North America (US &amp; Canada)</option>
-                      <option value="EMEA (UK & Europe)">EMEA (UK &amp; Europe)</option>
-                      <option value="APAC (Asia-Pacific)">APAC (Asia-Pacific)</option>
-                      <option value="Global Multi-Region">Global Multi-Region</option>
+                      <option value="" disabled>
+                        Choose a target market
+                      </option>
+                      <option value="North America (US & Canada)">
+                        North America (US &amp; Canada)
+                      </option>
+                      <option value="EMEA (UK & Europe)">
+                        EMEA (UK &amp; Europe)
+                      </option>
+                      <option value="APAC (Asia-Pacific)">
+                        APAC (Asia-Pacific)
+                      </option>
+                      <option value="Global Multi-Region">
+                        Global Multi-Region
+                      </option>
                     </select>
                     <span className="err">Choose a target market.</span>
                   </div>
-                </div>
-
-                <div className="row2">
-                  <div className={`field ${errors.pod ? "has-error" : ""}`}>
-                    <label htmlFor="f-pod">Product / service category</label>
-                    <select
-                      id="f-pod"
-                      name="pod"
-                      required
-                      value={formData.pod}
-                      onChange={handleChange}
-                    >
-                      <option value="" disabled>Select product or service</option>
-                      <option value="B2B SaaS & Software Platform">B2B SaaS &amp; Software Platform</option>
-                      <option value="Cybersecurity & Infrastructure Auth">Cybersecurity &amp; Infrastructure Auth</option>
-                      <option value="AI & Digital Platform Technology">AI &amp; Digital Platform Technology</option>
-                      <option value="Enterprise Advisory & Professional Services">Enterprise Advisory &amp; Services</option>
-                      <option value="Custom Tech Solution / Other">Custom Tech Solution / Other</option>
-                    </select>
-                    <span className="err">Select product or service.</span>
-                  </div>
-                  <div className={`field ${errors.team ? "has-error" : ""}`}>
-                    <label htmlFor="f-team">Current sales team size</label>
+                  <div className="field">
+                    <label htmlFor="f-team">
+                      Current sales team size <small>(optional)</small>
+                    </label>
                     <select
                       id="f-team"
                       name="team"
-                      required
                       value={formData.team}
                       onChange={handleChange}
                     >
-                      <option value="" disabled>Choose your team size</option>
-                      <option value="No team yet (Founder-led)">No team yet (Founder-led)</option>
+                      <option value="">Choose your team size</option>
+                      <option value="No team yet (Founder-led)">
+                        No team yet (Founder-led)
+                      </option>
                       <option value="1 to 5 SDRs/AEs">1 to 5 SDRs / AEs</option>
-                      <option value="6 to 20 sales team">6 to 20 sales team</option>
-                      <option value="20+ Enterprise Sales Org">20+ Enterprise Sales Org</option>
-                      <option value="Looking for fully outsourced pod">Looking for fully outsourced pod</option>
+                      <option value="6 to 20 sales team">
+                        6 to 20 sales team
+                      </option>
+                      <option value="20+ Enterprise Sales Org">
+                        20+ Enterprise Sales Org
+                      </option>
+                      <option value="Looking for fully outsourced pod">
+                        Looking for fully outsourced pod
+                      </option>
                     </select>
-                    <span className="err">Choose your team size.</span>
                   </div>
                 </div>
 
                 <div className={`field ${errors.goal ? "has-error" : ""}`}>
-                  <label htmlFor="f-goal">Primary commercial goal</label>
+                  <label htmlFor="f-goal">Primary goal</label>
                   <select
                     id="f-goal"
                     name="goal"
@@ -284,15 +339,47 @@ export default function Contact() {
                     value={formData.goal}
                     onChange={handleChange}
                   >
-                    <option value="" disabled>Choose a primary goal</option>
-                    <option value="Accelerate enterprise pipeline">Accelerate enterprise pipeline</option>
-                    <option value="Enter new geographic market">Enter new geographic market</option>
-                    <option value="Outsource outbound SDR function">Outsource outbound SDR function</option>
-                    <option value="Close high-value enterprise deals">Close high-value enterprise deals</option>
-                    <option value="Build RevOps and CRM">Build RevOps and CRM</option>
-                    <option value="Other custom requirement">Other custom requirement</option>
+                    <option value="" disabled>
+                      Choose a primary goal
+                    </option>
+                    <option value="Accelerate enterprise pipeline">
+                      Accelerate enterprise pipeline
+                    </option>
+                    <option value="Enter new geographic market">
+                      Enter new geographic market
+                    </option>
+                    <option value="Outsource outbound SDR function">
+                      Outsource outbound SDR function
+                    </option>
+                    <option value="Close high-value enterprise deals">
+                      Close high-value enterprise deals
+                    </option>
+                    <option value="Build RevOps and CRM">
+                      Build RevOps and CRM
+                    </option>
+                    <option value="Other custom requirement">
+                      Other custom requirement
+                    </option>
                   </select>
                   <span className="err">Choose a primary goal.</span>
+                </div>
+
+                <div className={`field ${errors.pod ? "has-error" : ""}`}>
+                  <label htmlFor="f-pod">
+                    Products and services you want sold
+                  </label>
+                  <input
+                    id="f-pod"
+                    name="pod"
+                    type="text"
+                    placeholder="e.g. Enterprise cybersecurity SaaS, AI automation platform..."
+                    required
+                    value={formData.pod}
+                    onChange={handleChange}
+                  />
+                  <span className="err">
+                    Enter the products or services you want sold.
+                  </span>
                 </div>
 
                 <div className="field">
@@ -309,11 +396,31 @@ export default function Contact() {
                   ></textarea>
                 </div>
 
-                <button className="btn btn--navy" type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "Submitting..." : "Book my growth strategy call \u2192"}
+                {submitError && (
+                  <p
+                    role="alert"
+                    style={{
+                      color: "#b32d24",
+                      fontSize: "0.9rem",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {submitError}
+                  </p>
+                )}
+
+                <button
+                  className="btn btn--navy"
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting
+                    ? "Submitting..."
+                    : "Book my growth strategy call"}
                 </button>
                 <p className="form-note">
-                  We reply within one business day. 100% confidential. Your details are never shared.
+                  We reply within one business day. 100% confidential. Your
+                  details are never shared.
                 </p>
               </form>
             ) : (
@@ -331,7 +438,10 @@ export default function Contact() {
                 </svg>
                 <h3>Thank you. We have your request.</h3>
                 <p>
-                  Our team will be in touch within 24 hours to review your commercial blueprint and schedule your strategy call.
+                  Your inquiry has been sent to{" "}
+                  <strong>sales@afatechnologiesltd.com</strong>. Our senior GTM
+                  leadership team will be in touch within 24 hours to schedule
+                  your growth strategy call.
                 </p>
               </div>
             )}
